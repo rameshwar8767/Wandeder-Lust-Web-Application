@@ -36,7 +36,7 @@ async function main() {
     
 }
 app.get('/', (req, res) => {
-    res.send('Welcome to the Home Page!');
+    res.render('home'); // Adjust this to render your home page template
 });
 
 
