@@ -18,6 +18,7 @@ const ExpressError = require("./utils/ExpressError");
 const listingRouter = require("./routes/listing");
 const reviewRouter = require("./routes/review");
 const userRouter = require("./routes/user.js");
+const Listing = require('./models/listing');
 
 
 const dbUrl = process.env.ATLASDB_URL;
@@ -89,8 +90,15 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get('/', (req, res) => {
-    res.render('home'); // Adjust this to render your home page template
+app.get('/', async (req, res) => {
+    try {
+        const allListings = await Listing.find({});
+        res.render('home', { allListings }); // Pass listings to the template
+    } catch (err) {
+        console.error(err);
+        req.flash('error', 'Cannot load listings');
+        res.redirect('/');
+    }
 });
 
 // Routes
