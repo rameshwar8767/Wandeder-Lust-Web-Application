@@ -35,9 +35,7 @@ async function main() {
     });
     
 }
-app.get('/', (req, res) => {
-    res.render('home'); // Adjust this to render your home page template
-});
+
 
 
 // Middleware and settings
@@ -89,6 +87,10 @@ app.use((req, res, next) => {
     res.locals.error = req.flash("error");
     res.locals.currUser = req.user;
     next();
+});
+
+app.get('/', (req, res) => {
+    res.render('home'); // Adjust this to render your home page template
 });
 
 // Routes
