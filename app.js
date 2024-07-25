@@ -35,6 +35,9 @@ async function main() {
     });
     
 }
+app.get('/', (req, res) => {
+    res.send('Welcome to the Home Page!');
+});
 
 
 // Middleware and settings
